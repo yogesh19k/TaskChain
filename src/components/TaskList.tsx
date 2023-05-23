@@ -1,6 +1,6 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import {useAppSelector,useAppDispatch} from "@/redux/hooks";
-import {createTaskList,addNewTaskInList} from "@/redux/features/taskList/taskListSlice";
+import {createTaskList,addNewTaskInList, loadTaskList} from "@/redux/features/taskList/taskListSlice";
 import {editCurrentTask} from "@/redux/features/editTodo/editTodoSlice"
 import {IoIosAddCircleOutline} from "react-icons/io"
 import {GiSwapBag} from "react-icons/gi"
@@ -16,6 +16,15 @@ export default function TasksList(){
     const [taskId,setTaskId]=useState<ReturnType<typeof nanoid>>()
     const dispatch = useAppDispatch();
     const tasksLists = useAppSelector(state=>state.tasklist)
+    useEffect(()=>{
+        const redux=localStorage.getItem("reduxTaskList")
+        if(redux){
+            dispatch(loadTaskList(JSON.parse(redux)))
+        }
+    },[])
+    useEffect(()=>{
+        localStorage.setItem('reduxTaskList',JSON.stringify(tasksLists))
+    })
     const taskElements = tasksLists.map(taskList =>{
         return(
             <div key={taskList.Id} className="List-Tasks">

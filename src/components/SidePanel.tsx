@@ -7,7 +7,7 @@ import {BiArrowBack} from "react-icons/bi"
 import {VscGlobe} from "react-icons/vsc"
 import {BiToggleRight} from "react-icons/bi"
 import { useAppDispatch } from "@/redux/hooks";
-import { resetTaskList } from "@/redux/features/taskList/taskListSlice";
+import { loadTaskList } from "@/redux/features/taskList/taskListSlice";
 
 
 export default function SidePanel(){
@@ -22,7 +22,7 @@ export default function SidePanel(){
                         <p className="profile-name">Name</p>
                     </div>
                     <BiArrowBack
-                        onClick={()=>dispatch(resetTaskList())}
+                        onClick={()=>dispatch(loadTaskList([]))}
                     />
                 </div>
                 <button 

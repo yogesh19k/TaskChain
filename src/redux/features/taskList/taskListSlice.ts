@@ -50,13 +50,13 @@ export const taskListSlice = createSlice({
                 })
             )
         },
-        resetTaskList:(state)=>{
-            return([])
+        loadTaskList:(state,action:PayloadAction<TaskList[]>)=>{
+            return(action.payload)
         }
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { createTaskList,addNewTaskInList,saveEditTask,resetTaskList } = taskListSlice.actions
+export const { createTaskList,addNewTaskInList,saveEditTask,loadTaskList } = taskListSlice.actions
 
 export default taskListSlice.reducer
