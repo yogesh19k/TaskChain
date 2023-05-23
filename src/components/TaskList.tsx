@@ -17,15 +17,6 @@ export default function TasksList(){
     const dispatch = useAppDispatch();
     const tasksLists = useAppSelector(state=>state.tasklist)
     const editingInfo = useAppSelector(state =>state.editTodo)
-    useEffect(()=>{
-        const redux=localStorage.getItem("reduxTaskList")
-        if(redux){
-            dispatch(loadTaskList(JSON.parse(redux)))
-        }
-    },[])
-    useEffect(()=>{
-        localStorage.setItem('reduxTaskList',JSON.stringify(tasksLists))
-    })
     const taskElements = tasksLists.map(taskList =>{
         return(
             <div key={taskList.Id} className="List-Tasks">
