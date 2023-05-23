@@ -27,7 +27,12 @@ export default function EditTask(){
     return(
         <div className="editTask">
             <div className="editBack">
-                <BiArrowBack/>
+                <BiArrowBack 
+                    onClick={()=>
+                        dispatch(editCurrentTask({
+                            isEditing:false}))
+                    }
+                />
                 <p>Edit Todo</p>
             </div>
             <input

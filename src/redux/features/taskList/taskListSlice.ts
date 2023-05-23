@@ -52,11 +52,32 @@ export const taskListSlice = createSlice({
         },
         loadTaskList:(state,action:PayloadAction<TaskList[]>)=>{
             return(action.payload)
+        },
+        taskMarkDone:(state,action:PayloadAction<AddTodo>)=>{
+            return(
+                state.map(taskList => {
+                    if(taskList.Id === action.payload.Id){
+                        return({ 
+                            ...taskList,
+                            todos:taskList.todos.map(todo =>{
+                                if(todo.id===action.payload.todo.id){
+                                    return ({
+                                        ...action.payload.todo,
+                                        isDone:!action.payload.todo.isDone
+                                    })
+                                }
+                                return todo
+                            })
+                        })
+                    }
+                    return taskList
+                })
+            )
         }
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { createTaskList,addNewTaskInList,saveEditTask,loadTaskList } = taskListSlice.actions
+export const { createTaskList,addNewTaskInList,saveEditTask,loadTaskList,taskMarkDone} = taskListSlice.actions
 
 export default taskListSlice.reducer

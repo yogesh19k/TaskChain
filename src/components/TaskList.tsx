@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from "react";
 import {useAppSelector,useAppDispatch} from "@/redux/hooks";
-import {createTaskList,addNewTaskInList, loadTaskList} from "@/redux/features/taskList/taskListSlice";
+import {createTaskList,addNewTaskInList, loadTaskList, taskMarkDone} from "@/redux/features/taskList/taskListSlice";
 import {editCurrentTask} from "@/redux/features/editTodo/editTodoSlice"
 import {IoIosAddCircleOutline} from "react-icons/io"
 import {GiSwapBag} from "react-icons/gi"
@@ -16,6 +16,7 @@ export default function TasksList(){
     const [taskId,setTaskId]=useState<ReturnType<typeof nanoid>>()
     const dispatch = useAppDispatch();
     const tasksLists = useAppSelector(state=>state.tasklist)
+    const editingInfo = useAppSelector(state =>state.editTodo)
     useEffect(()=>{
         const redux=localStorage.getItem("reduxTaskList")
         if(redux){
@@ -30,7 +31,7 @@ export default function TasksList(){
             <div key={taskList.Id} className="List-Tasks">
                 <p>{`List: ${taskList.Id}`}</p>
                 <div className="addTaskInTheList">
-                    <span><GiSwapBag/></span>
+                    <span  className="task-check-maker"><GiSwapBag/></span>
                     <input 
                         value={taskList.Id==taskId?todoName:""}
                         onChange={(e)=>{
@@ -40,9 +41,11 @@ export default function TasksList(){
                         className="textInput"
                         placeholder="Add Todo"
                     />
-                    <IoIosAddCircleOutline
-                        onClick={()=>handelTodoAdd(taskList.Id)}
-                    />
+                    <span className="actionButton">
+                        <IoIosAddCircleOutline
+                            onClick={()=>handelTodoAdd(taskList.Id)}
+                        />
+                    </span>
                     <textarea 
                         value={taskList.Id==taskId?todoDisc:""}
                         onChange={(e)=>{
@@ -56,12 +59,22 @@ export default function TasksList(){
                 {taskList.todos.map(todo=>{
                     return (                
                         <div key={todo.id} className="addTaskInTheList">
-                            <span><GiSwapBag/></span>
+                            <span
+                                className={`task-check 
+                                            ${todo.isDone && "task-completed"}`}
+                                onClick={()=>handelMarkDone(taskList.Id,todo)}>
+                                <GiSwapBag/>
+                            </span>
                             <p className="textInput">
                                 {todo.title}
                             </p>
-                            <CiEdit onClick={()=>handelEditTodo(taskList.Id,todo)}
-                            />
+                            <span className={`actionButton 
+                                ${editingInfo.isEditing && "editingEnabled"} 
+                                ${editingInfo.isEditing && 
+                                editingInfo.task?.todo.id==todo.id && "currentEditing"}`
+                                }>
+                                <CiEdit onClick={()=>handelEditTodo(taskList.Id,todo)}
+                            /></span>
                             <p className="text-area">
                                 {todo.description}
                             </p>
@@ -72,6 +85,14 @@ export default function TasksList(){
         )
     })
     
+    function handelMarkDone(Id:string,todo:Tasks){
+        dispatch(taskMarkDone({
+            Id,
+            todo
+        }))
+    }
+
+
     function handelEditTodo(Id:string,todo:Tasks){
         dispatch(editCurrentTask({
             isEditing:true,

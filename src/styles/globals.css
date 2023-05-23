@@ -18,6 +18,9 @@ textarea:hover,textarea:active,textarea:focus-visible{
     outline: none;
 }
 
+button:hover{
+    cursor: pointer;
+}
 
 
 
@@ -278,6 +281,10 @@ main{
     margin-right: 10px;
 }
 
+.editBack>svg:hover{
+    cursor: pointer;
+}
+
 .editTask>input{
     width:100%;
     border: none;
@@ -327,6 +334,10 @@ main{
     display: none;
 }
 
+.tasksList svg:hover{
+    cursor: pointer;
+}
+
 .addTask-list,.List-Tasks>p{
     display: flex;
     align-items: center;
@@ -369,18 +380,38 @@ main{
     color: #ffffff;
 }
 
-.addTaskInTheList>span>svg{
+.task-check>svg{
     font-size: 1.1rem;
     color: plum;
+}
+
+.task-check-maker{
+    font-size: 1.1rem;
+}
+.task-check-maker>svg:hover{
+    cursor:context-menu;
+}
+
+.task-completed>svg{
+    color: aquamarine;
 }
 
 .addTaskInTheList>span{
     height: 1.1rem;
 }
 
-.addTaskInTheList>svg{
+.actionButton{
     font-size: 1.6rem;
 }
+
+.currentEditing{
+    color: red;
+}
+
+.editingEnabled>svg:hover{
+    cursor: not-allowed;
+}
+
 
 
 .text-area{
