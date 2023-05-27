@@ -45,7 +45,10 @@ Follow the instructions below to get a local copy of TaskChain up and running on
 
 ## Usage
 
-You can find the live hosted website on the link [Vercel Link](https://www.taskchain.com).
+You can find the live hosted website on the following links:
+
+- TaskChain (main branch): [Vercel Link](https://task-chain-theta.vercel.app/)
+- TaskChain (local storage persist branch): [Vercel Link](https://task-chain-local.vercel.app/)
 
 To interact with TaskChain, you need to create a wallet account like MetaMask and configure it to connect to the Polygon Testnet Mumbai network using the following settings:
 
