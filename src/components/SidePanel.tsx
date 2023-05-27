@@ -8,9 +8,12 @@ import {VscGlobe} from "react-icons/vsc"
 import {BiToggleRight} from "react-icons/bi"
 import { useAppDispatch } from "@/redux/hooks";
 import { loadTaskList } from "@/redux/features/taskList/taskListSlice";
+import { useMoralis } from "react-moralis";
+import { ENSAvatar } from "web3uikit";
 
 
 export default function SidePanel(){
+    const {isWeb3Enabled,account} = useMoralis()
     const [pageNo,setPageNo] = useState<number>(5);
     const dispatch=useAppDispatch()
     return (
@@ -18,11 +21,17 @@ export default function SidePanel(){
             <div className="topPart">
                 <div className="profile">  
                     <div className="profile-details">
-                        <div className="profile-logo"><p>N</p></div>
-                        <p className="profile-name">Name</p>
+                        <div className="profile-logo">
+                        {!isWeb3Enabled?<p>N</p>
+                        :<ENSAvatar address={account!} size={30}/>}
+                        </div>
+                        <p className="profile-name">
+                            {!isWeb3Enabled?"Name"
+                            :`${account!.slice(0,5)}..${account!.slice(-5)}`}
+                        </p>
                     </div>
                     <BiArrowBack
-                        onClick={()=>dispatch(loadTaskList([]))}
+                        // onClick={()=>dispatch(loadTaskList([]))}
                     />
                 </div>
                 <button 

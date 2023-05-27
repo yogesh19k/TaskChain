@@ -16,3 +16,15 @@ export interface AddTodo{
     Id:string,
     todo:Tasks
 }
+
+type ContractTasks=[
+    string,
+    string,
+    string,
+    boolean,
+]
+
+export type ContractTaskList=[
+    string,
+    ContractTasks[]
+]

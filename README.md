@@ -1,8 +1,12 @@
 # TaskChain - Decentralized To-Do Web App
 
+Please note that there is another branch, `local-storage-persist`, of the repository that uses Redux with persistent local storage to retain the task list even after refreshing the page.
+
 ![TaskChain Logo](taskchain_logo.png)
 
 TaskChain is a decentralized to-do web app built with Next.js, TypeScript, and Redux. It leverages the power of blockchain technology to provide a secure and transparent task management solution.
+
+The smart contract for TaskChain is deployed on the Polygon Testnet Mumbai. The contract address is `0xb59484Fc012d62E00036C779A9bd098c5F54f3ED`.
 
 ## Features
 
@@ -39,15 +43,21 @@ Follow the instructions below to get a local copy of TaskChain up and running on
 1. Start the development server: `npm run dev`
 2. Open your browser and access TaskChain at `http://localhost:3000`
 
-## Contributing
+## Usage
 
-Contributions are welcome! If you'd like to contribute to TaskChain, please follow these steps:
+You can find the live hosted website on the link [Vercel Link](https://www.taskchain.com).
 
-1. Fork the repository.
-2. Create a new branch for your feature: `git checkout -b feature-name`
-3. Make your changes and commit them: `git commit -m 'Add some feature'`
-4. Push the changes to your forked repository: `git push origin feature-name`
-5. Submit a pull request to the main repository.
+To interact with TaskChain, you need to create a wallet account like MetaMask and configure it to connect to the Polygon Testnet Mumbai network using the following settings:
+
+- Network Name: Mumbai Testnet
+- RPC URL: https://rpc-mumbai.maticvigil.com/
+- Chain ID: 80001
+- Currency Symbol: Matic
+- Block Explorer URL: https://polygonscan.com/
+
+After configuring MetaMask, you can use the following faucet to get some Matic tokens for gas: [Polygon Faucet](https://faucet.polygon.technology/).
+
+Once you have completed the setup, open the TaskChain website, and you will be able to interact with it.
 
 ## License
 
@@ -55,6 +65,4 @@ TaskChain is released under the [MIT License](LICENSE).
 
 ## Contact
 
-If you have any questions or suggestions, feel free to reach out to our team at [contact@taskchain.com](mailto:contact@taskchain.com).
-
-Visit our website: [www.taskchain.com](https://www.taskchain.com)
+If you have any questions or suggestions
