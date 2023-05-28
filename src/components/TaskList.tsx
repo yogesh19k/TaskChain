@@ -1,10 +1,11 @@
 import React,{useEffect, useState} from "react";
 import {useAppSelector,useAppDispatch} from "@/redux/hooks";
-import {createTaskList,addNewTaskInList, loadTaskList, taskMarkDone} from "@/redux/features/taskList/taskListSlice";
+import {createTaskList,addNewTaskInList, loadTaskList, taskMarkDone,deleteList} from "@/redux/features/taskList/taskListSlice";
 import {editCurrentTask} from "@/redux/features/editTodo/editTodoSlice"
 import {IoIosAddCircleOutline} from "react-icons/io"
 import {GiSwapBag} from "react-icons/gi"
 import {CiEdit} from "react-icons/ci"
+import {ImBin} from "react-icons/im"
 import {nanoid} from "nanoid";
 import {Tasks,TaskList,AddTodo} from '@/redux/features/Type'
 
@@ -20,7 +21,11 @@ export default function TasksList(){
     const taskElements = tasksLists.map(taskList =>{
         return(
             <div key={taskList.Id} className="List-Tasks">
-                <p>{`List: ${taskList.Id}`}</p>
+                <div className="List-Task-Name">
+                    <p>{`List: ${taskList.Id}`}</p>
+                    <ImBin onClick={()=>dispatch(deleteList(taskList.Id))}
+                    />
+                </div>
                 <div className="addTaskInTheList">
                     <span  className="task-check-maker"><GiSwapBag/></span>
                     <input 

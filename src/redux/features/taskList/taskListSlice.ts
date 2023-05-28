@@ -1,5 +1,6 @@
 import { createSlice,PayloadAction } from '@reduxjs/toolkit'
 import {Tasks,TaskList,AddTodo} from '../Type'
+import { nanoid } from 'nanoid'
 
 
 const initialState:TaskList[]=[]
@@ -32,6 +33,9 @@ export const taskListSlice = createSlice({
                 return taskList
             }))
         },
+        deleteList:(state,action:PayloadAction<ReturnType<typeof nanoid>>)=>{
+            return (state.filter(taskList => taskList.Id !== action.payload))
+        },
         saveEditTask:(state,action:PayloadAction<AddTodo>)=>{
             return(
                 state.map(taskList => {
@@ -44,6 +48,19 @@ export const taskListSlice = createSlice({
                                 }
                                 return todo
                             })
+                        })
+                    }
+                    return taskList
+                })
+            )
+        },
+        DeleteTaskInList:(state,action:PayloadAction<AddTodo>)=>{
+            return(
+                state.map(taskList => {
+                    if(taskList.Id === action.payload.Id){
+                        return({ 
+                            ...taskList,
+                            todos:taskList.todos.filter(todo => todo.id!==action.payload.todo.id)
                         })
                     }
                     return taskList
@@ -78,6 +95,6 @@ export const taskListSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { createTaskList,addNewTaskInList,saveEditTask,loadTaskList,taskMarkDone} = taskListSlice.actions
+export const { createTaskList,addNewTaskInList,saveEditTask,loadTaskList,taskMarkDone,deleteList,DeleteTaskInList} = taskListSlice.actions
 
 export default taskListSlice.reducer

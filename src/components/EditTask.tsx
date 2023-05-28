@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import {BiArrowBack} from "react-icons/bi"
+import { ImBin } from "react-icons/im";
 import { useAppDispatch,useAppSelector } from "@/redux/hooks";
-import { saveEditTask } from "@/redux/features/taskList/taskListSlice"
+import { saveEditTask,DeleteTaskInList } from "@/redux/features/taskList/taskListSlice"
 import { editCurrentTask } from "@/redux/features/editTodo/editTodoSlice";
 
 export default function EditTask(){
@@ -24,6 +25,16 @@ export default function EditTask(){
         }))
     }
 
+    function handelDel(){
+        if(editData)
+            dispatch(DeleteTaskInList({
+                ...editData
+            }))
+        dispatch(editCurrentTask({
+            isEditing:false
+        }))
+    }
+
     return(
         <div className="editTask">
             <div className="editBack">
@@ -34,6 +45,10 @@ export default function EditTask(){
                     }
                 />
                 <p>Edit Todo</p>
+                <span>
+                    <ImBin onClick={()=>handelDel()}
+                    />
+                </span>
             </div>
             <input
                 onChange={(e)=>setTodoName(e.target.value)}

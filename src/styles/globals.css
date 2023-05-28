@@ -281,6 +281,19 @@ main{
     cursor: pointer;
 }
 
+.editBack>p{
+    margin-right: 150px;
+}
+
+.editBack>span>svg{
+    font-size: 1.1rem;
+    color: rgba(255, 0, 0, 0.827);
+}
+
+.editBack>span>svg:hover{
+    cursor: pointer;
+}
+
 .editTask>input{
     width:100%;
     border: none;
@@ -334,7 +347,7 @@ main{
     cursor: pointer;
 }
 
-.addTask-list,.List-Tasks>p{
+.addTask-list,.List-Task-Name{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -344,9 +357,14 @@ main{
     border-radius: 15px;
 }
 
-.List-Tasks>p{
-    padding: 20px;
+.List-Task-Name{
+    padding: 20px 15px 20px 20px;
     color: #ffffff;
+}
+
+.List-Task-Name>svg{
+    font-size: 1.1rem;
+    color: rgba(255, 0, 0, 0.827);
 }
 
 
